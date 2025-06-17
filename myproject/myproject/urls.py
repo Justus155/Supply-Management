@@ -15,8 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+# Importing the views module from the supply app is not necessary here
+# since we are not using any views directly in this file.
+# from supply import views  # This import is not needed in this file
+# The above import is not used in this file, so it can be removed.
+# The views module is typically used in the supply app's urls.py file
+# to define the views for the URLs in that app.
+# The import statement for views is not needed in this file
+# as we are only defining the URL patterns for the project.
+
+# The urlpatterns list routes URLs to views.
+# For more information please see:
+
+
+# https://docs.djangoproject.com/en/5.2/topics/http/urls/
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path("", include('supply.urls')),
 ]
