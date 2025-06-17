@@ -6,6 +6,6 @@ from django.urls import include, path
 
 #create views
 def home(request):
-    return render(request, "supply/home.html")
+    return render(request, "supply/index.html")
 
 # Create your views here.
