@@ -1,6 +1,19 @@
 from django.db import models
 
 # Create your models here.
+class clinicSignIn(models.Model):
+    clinic_license = models.CharField(max_length=100, default='permanent_license',unique=True)
+    password = models.CharField(max_length=128)
+class DistributorSignIn(models.Model):    
+    distributor_license = models.CharField(max_length=100, default='permanent_license',unique=True)
+    password = models.CharField(max_length=128)
+class ClinicSignUp(models.Model):
+    clinic_license = models.CharField(max_length=100, unique=True)
+    password = models.CharField(max_length=128)
+class DistributorSignUp(models.Model):
+    distributor_license = models.CharField(max_length=100, unique=True)
+    subsection = models.CharField(max_length=100)
+    password = models.CharField(max_length=128)        
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
