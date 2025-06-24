@@ -35,4 +35,6 @@ class Order(models.Model):
         ('CANCELLED', 'Cancelled')
     ], default='PENDING')
     def __str__(self):
+        return f"Order {self.id} - {self.product.name} ({self.status})"
+    def __str__(self):
         return self.name
