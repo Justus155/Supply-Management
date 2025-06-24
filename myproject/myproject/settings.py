@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "supply", 
     "rest_framework",
-    "myproject.api",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -83,7 +83,7 @@ DATABASES = {
     }
 }
 
-
+AUTH_USER_MODEL = 'supply.Clinic'  # Set the custom user model
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 

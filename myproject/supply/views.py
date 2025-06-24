@@ -13,6 +13,14 @@ from django.urls import include, path
 from  .models import Product, Supplier, Order
 from django.contrib.auth import authenticate
 from  .serializers import *
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import permissions
+from rest_framework.views import APIView
+from rest_framework import viewsets
+from rest_framework import generics
+
+
 def home(request):
     return render(request, "home.html")
 def signIn(request):
@@ -128,3 +136,30 @@ def create_order(request, product_id):
         messages.success(request, 'Order created successfully!')
         return redirect('product_list')
     return render(request, 'create_order.html', {'product': product})
+
+
+
+
+#CLINIC SIGN UP
+class clinicSignUpview(generics.CreateAPIView):
+    queryset=Clinic.objects.all()
+    serializers_class = clinicSignUpSerializer
+    permissions_classes = [permissions.AllowAny]
+#CLINIC SIGNIN 
+
+class clinicSignInview(generics.CreateAPIView):
+    permissions_classes = [permissions.AllowAny]    
+class clinicSignUpViewSet(viewsets.ModelViewSet):
+    queryset = Clinic.objects.all()
+    serializer_class = clinicSignUpSerializer
+    permission_classes = [permissions.IsAuthenticated]
+class ClinicSerializerView(APIView):
+    def post(self, request):
+        clinic_license = request.data.get('clinic_license')
+        password = request.data.get('password')
+        clinic= authenticate(request, clinic_license=clinic_license, password=password)
+        if clinic:
+            login(request, clinic)
+            return Response({"message": "Login successful!"}, status=status.HTTP_200_OK)
+        else:
+            return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
