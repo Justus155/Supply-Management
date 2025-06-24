@@ -18,6 +18,8 @@
             <div class="pill-3 rotate-45"></div>
             <div class="pill-4 rotate-45"></div>
         </div>
+    <form action="" method="post">
+            {% csrf_token %}
         <div class="login">
             <h3 class="title">User Sign Up</h3>
             <div class="text-input">
@@ -28,7 +30,7 @@
                 <i class="ri-lock-fill"></i>
                 <input type="password" placeholder="Password">
             </div>
-            <button class="login-btn">Sign Up</button>
+            <button type="submit"class="login-btn"<a href="clinicWelcome/">Sign Up</a></button>
         </div>
     </div>
 </body>
