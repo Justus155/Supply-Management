@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 class clinicSignIn(models.Model):
     clinic_license = models.CharField(max_length=100, default='permanent_license',unique=True)

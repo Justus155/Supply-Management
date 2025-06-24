@@ -2,14 +2,17 @@ from pyexpat.errors import messages
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.urls import path
-
-from myproject.supply.forms import ClinicSignUpForm
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from .models import Product, Supplier, Order
+from .forms import ClinicSignInForm, ClinicSignUpForm, DistributorSignInForm, DistributorSignUpForm
 from . import views
 from django.urls import include, path
 from  .models import Product, Supplier, Order
 from django.contrib.auth import authenticate
-
-#create views
+from  .serializers import *
 def home(request):
     return render(request, "home.html")
 def signIn(request):
@@ -27,7 +30,7 @@ def clinicsignIn(request):
         if user.objects.filter(clinic_license=clinic_license, password=password).exists():
             login(request, user)
             messages.success(request, 'Login successful!')
-            return redirect('signIn/clinicWelcome')  # Redirect to home page
+            return redirect('/clinicWelcome')  # Redirect to home page
         else:
             messages.error(request, 'Invalid credentials')
             return redirect('signIn/')  # Redirect back to login page
@@ -38,7 +41,9 @@ def clinicsignIn(request):
 def clinic_welcome(request):
     if not request.user.is_clinic:  # You'll need to add this check in your user model
         return redirect('home')
-    return render(request, "clinic.html")
+    user = request.user
+    sdata = ClinicSerializer(user).data
+    return render(request, "clinic.html", sdata)
 
 @login_required
 def distributor_welcome(request):

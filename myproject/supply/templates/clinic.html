@@ -11,6 +11,9 @@
     <header>
         <div class="container">
             <h1>Clinic Portal</h1>
+            {%for data in sdata %}
+            <h2>Welcome {data.clinic_license}</h2>
+            {%endfor%%}
             <nav>
                 <ul>
                     <li><a href="#dashboard">Dashboard</a></li>
