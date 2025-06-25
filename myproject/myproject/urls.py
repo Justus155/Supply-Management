@@ -33,7 +33,6 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include('supply.urls')),# This includes the URLs from the supply app
-    path("API/", include('api.urls')),# This includes the URLs from the API app
-    
+    path('supply/', include('supply.urls')),
+    path('', include('supply.urls')),  # Add this to make 'supply' the default app at root URL
 ]

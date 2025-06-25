@@ -1,37 +1,49 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.core.validators import RegexValidator
+from django.contrib.auth.hashers import make_password, check_password
 
-
-# Create your models here.
-
-#creating an adbstract class for common fields
-class Clinic (AbstractUser):
-
-    clinic_license = models.CharField(max_length=100, unique=True)
-    name = models.CharField(max_length=100, blank=True, null=True)
-    email = models.EmailField(max_length=254, unique=True, blank=True, null=True)
-    password = models.CharField(max_length=128)
+class Clinic(models.Model):
+    license_number = models.CharField(
+        max_length=15,
+        unique=True,
+        validators=[
+            RegexValidator(
+                regex='^C[A-Z0-9]{4,14}$',
+                message='Clinic license must start with C followed by 4-14 alphanumeric characters',
+                code='invalid_clinic_license'
+            )
+        ]
+    )
+    password = models.CharField(max_length=128)  # Store hashed passwords
     
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['clinic_license', 'password']
-    def __str__(self):
-        return self.clinic_license
-class distributor(models.Model):
-    distributor_license = models.CharField(max_length=100, unique=True)
-    name= models.CharField(max_length=100, blank=True, null=True)
-    password = models.CharField(max_length=128)
-
-    USERNAME_FIELD = 'name'
-    REQUIRED_FIELDS = ['distributor_license', 'password']
-
-    @property
-    def is_anonymous(self):
-        return False  # Or implement custom logic
-
-    @property
-    def is_authenticated(self):
-        return True   # Or implement custom logic
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+    
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
     
     def __str__(self):
-        return self.distributor_license
+        return f"Clinic {self.license_number}"
 
+class Distributor(models.Model):
+    license_number = models.CharField(
+        max_length=15,
+        unique=True,
+        validators=[
+            RegexValidator(
+                regex='^D[A-Z0-9]{4,14}$',
+                message='Distributor license must start with D followed by 4-14 alphanumeric characters',
+                code='invalid_distributor_license'
+            )
+        ]
+    )
+    password = models.CharField(max_length=128)  # Store hashed passwords
+    
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+    
+    def check_password(self, raw_password):
+        return check_password(raw_password, self.password)
+    
+    def __str__(self):
+        return f"Distributor {self.license_number}"
