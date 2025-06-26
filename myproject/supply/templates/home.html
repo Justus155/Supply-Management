@@ -4,51 +4,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MSM System - Medicine Supply Management</title>
-    <link rel="stylesheet" href="static/home.css">
+    <title>SMS System - Supply Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
 <body>
-    <header>
-        <div class="logo">MSM System</div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="signIn/" class="btn btn-outline">Sign In</a></li>
-                <li><a href="signUp/" class="btn">Sign Up</a></li>
-            </ul>
-        </nav>
-    </header>
-    
-    <section class="hero">
-        <h1>Welcome to MSM System</h1>
-        <p>Revolutionizing medicine supply chain management for clinics, pharmacies, and distributors across Kenya</p>
-        <a href="#" class="btn" style="font-size: 1.2rem; padding: 1rem 2rem;">Get Started</a>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class=>SMS System</a>
+            <div class="d-flex">
+                <div class="dropdown me-2">
+                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown" data-bs-toggle="dropdown">
+                        Sign In
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href=" clinic_signin">
+                            <button class="role-btn">As Clinic</button>
+                        </a></li>
+                        <li><a class="dropdown-item" href="">
+                            <button class="role-btn">As Distributor</button>
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" id="signupDropdown" data-bs-toggle="dropdown">
+                        Sign Up
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href=" clinic_signup">
+                            <button class="role-btn">Clinic Registration</button>
+                        </a></li>
+                        <li><a class="dropdown-item" href="">
+                            <button class="role-btn">Distributor Registration</button>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero text-center mb-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Welcome to SMS System</h1>
+            <p class="lead mb-4">Optimizing medicine supply chains for healthcare providers and distributors</p>
+            <a href="#features" class="btn btn-light btn-lg px-4">Learn More</a>
+        </div>
     </section>
-    
-    <section class="features">
-        <div class="feature-card">
-            <img src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Real-time Tracking">
-            <h3>Real-time Inventory Tracking</h3>
-            <p>Monitor medicine stock levels across all facilities in real-time to prevent stock outs and overstocking.</p>
-        </div>
-        
-        <div class="feature-card">
-            <img src="static/image1.jpeg" alt="Automated Orders">
-            <h3>Automated Replenishment</h3>
-            <p>Smart algorithms predict demand and automatically generate orders for distributors when stock runs low.</p>
-        </div>
-        
-        <div class="feature-card">
-            <img src="static/track.jpeg" alt="Delivery Tracking">
-            <h3>End-to-End Delivery Tracking</h3>
-            <p>Track medicine shipments from distributor warehouses to clinics with GPS and temperature monitoring.</p>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <img src="{% static 'images/inventory.jpg' %}" class="card-img-top" alt="Inventory Management">
+                        <div class="card-body">
+                            <h5 class="card-title">Real-Time Inventory</h5>
+                            <p class="card-text">Track medicine stock levels across all facilities with automated alerts.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <img src="{% static 'track.jpeg' %}" class="card-img-top" alt="Automated Ordering">
+                        <div class="card-body">
+                            <h5 class="card-title">Delivery Tracking</h5>
+                            <p class="card-text">Monitor shipments with GPS and temperature sensors for sensitive medicines.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="card feature-card h-100">
+                        <img src="{% static 'image1.jpeg' %}" class="card-img-top" alt="Demand Analytics">
+                        <div class="card-body">
+                            <h5 class="card-title">Demand Forecasting</h5>
+                            <p class="card-text">AI-powered predictions to prevent stockouts and overstocking.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    
-    <footer>
-        <p>&copy; 2023 MSM System - Medicine Supply Management. All rights reserved.</p>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; {% now "Y" %} MSM System. All rights reserved.</p>
+        </div>
     </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,29 +1,67 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login
 from .models import Clinic, Distributor
+from .forms import signupForm, loginForm
 
 def home(request):
     return render(request, 'home.html')
 
+def clinic_signup_home(request):
+    return render(request, 'home.html')
+
+def clinic_signin(request):
+    return render(request, 'clinic_in.html')
+
 def clinic_signup(request):
     if request.method == 'POST':
-        license_number = request.POST.get('license_number')
-        password = request.POST.get('password')
-        
-        if not license_number.startswith('C'):
-            messages.error(request, 'Clinic license must start with C')
-            return redirect('clinic_signup')
+        form = signupForm(request.POST)
+        if form.is_valid():
+            license_number = form.cleaned_data.get('license_number')
+            password = form.cleaned_data.get('password')
             
-        try:
-            clinic = Clinic(license_number=license_number)
-            clinic.set_password(password)
-            clinic.save()
-            messages.success(request, 'Clinic account created successfully!')
-            return redirect('clinic_signin')
-        except Exception as e:
-            messages.error(request, f'Error creating account: {str(e)}')
-    
-    return render(request, 'SignUp.html')
+            if not license_number.startswith('C'):
+                messages.error(request, 'Clinic license must start with C')
+                return redirect('clinic_signup')
+            
+            try:
+                clinic = Clinic(license_number=license_number)
+                clinic.set_password(password)
+                clinic.save()
+                messages.success(request, 'Clinic account created successfully!')
+                return redirect('clinic_signin')
+            except Exception as e:
+                messages.error(request, f'Error creating account: {str(e)}')
+        else:
+            messages.error(request, 'Invalid form submission')
+    else:
+        form = signupForm()
+    return render(request, 'clinic_up.html', {'form': form})
+
+def distributor_signup(request):
+    if request.method == 'POST':
+        form = signupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('distributor_signin')  # Redirect to sign-in
+    else:
+        form = signupForm()
+    return render(request, 'distributor_up.html', {'form': form})
+
+def distributor_signin(request):
+    # Your existing sign-in view with medical theme
+    return render(request, 'distributor_in.html')            
+
+
+def clinicPortal(request):
+    if 'clinic_license' not in request.session:
+        return redirect('clinic_signin')
+    return render(request, 'clinic.html')
+
+def distributorPortal(request):
+    if 'distributor_license' not in request.session:
+        return redirect('distributor_signin')
+    return render(request, 'distributor.html')
 
 def distributor_signup(request):
     if request.method == 'POST':
@@ -43,41 +81,13 @@ def distributor_signup(request):
         except Exception as e:
             messages.error(request, f'Error creating account: {str(e)}')
     
-    return render(request, 'SignUp.html')
+    return render(request, 'signup.html')
 
-def clinic_signin(request):
-    if request.method == 'POST':
-        license_number = request.POST.get('license_number')
-        password = request.POST.get('password')
-        
-        try:
-            clinic = Clinic.objects.get(license_number=license_number)
-            if clinic.check_password(password):
-                request.session['clinic_license'] = license_number
-                return redirect('clinic_portal')
-            else:
-                messages.error(request, 'Invalid password')
-        except Clinic.DoesNotExist:
-            messages.error(request, 'Clinic not found')
-    
-    return render(request, 'index.html')
+from django.shortcuts import render, redirect
+from django.contrib import messages
+from .models import Clinic, Distributor
+from .forms import signupForm, loginForm
 
-def distributor_signin(request):
-    if request.method == 'POST':
-        license_number = request.POST.get('license_number')
-        password = request.POST.get('password')
-        
-        try:
-            distributor = Distributor.objects.get(license_number=license_number)
-            if distributor.check_password(password):
-                request.session['distributor_license'] = license_number
-                return redirect('distributor_portal')
-            else:
-                messages.error(request, 'Invalid password')
-        except Distributor.DoesNotExist:
-            messages.error(request, 'Distributor not found')
-    
-    return render(request, 'index.html')
 
 def clinic_portal(request):
     if 'clinic_license' not in request.session:
@@ -88,5 +98,6 @@ def distributor_portal(request):
     if 'distributor_license' not in request.session:
         return redirect('distributor_signin')
     return render(request, 'distributor.html')
+
 
 

@@ -1,0 +1,61 @@
+.medical-auth-container {
+    background-color: #f0f8ff;
+    border: 1px solid #c1e1ff;
+    border-radius: 10px;
+    padding: 2rem;
+    max-width: 500px;
+    margin: 2rem auto;
+    box-shadow: 0 0 15px rgba(0, 119, 182, 0.1);
+}
+
+.medical-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.medical-header img {
+    height: 80px;
+    margin-bottom: 1rem;
+}
+
+.medical-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.medical-form-group label {
+    color: #005b96;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.medical-form-group input,
+.medical-form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #a3d0ff;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.medical-btn {
+    background-color: #0077b6;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.medical-btn:hover {
+    background-color: #005b96;
+}
+
+.medical-hint {
+    color: #5c9ead;
+    font-size: 0.8rem;
+    display: block;
+    margin-top: 0.25rem;
+}

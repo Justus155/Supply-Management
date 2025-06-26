@@ -1,21 +1,28 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.contrib.auth.hashers import make_password, check_password
-
+from django.contrib.auth.models import AbstractUser
 class Clinic(models.Model):
-    license_number = models.CharField(
-        max_length=15,
-        unique=True,
-        validators=[
-            RegexValidator(
-                regex='^C[A-Z0-9]{4,14}$',
-                message='Clinic license must start with C followed by 4-14 alphanumeric characters',
-                code='invalid_clinic_license'
-            )
-        ]
-    )
-    password = models.CharField(max_length=128)  # Store hashed passwords
+    name= models.CharField(max_length=100)
+    license_number = models.CharField(max_length=15,unique=True)
+    password = models.CharField(max_length=128)
+
+class Distributor(AbstractUser):
+    SUBSECTOR_CHOICES = [
+        ('WHOLESALE', 'Wholesale Distributor'),
+        ('SPECIALTY', 'Specialty Medicine Distributor'),
+        ('GOVERNMENT', 'Government Medical Store'),
+    ]
     
+    subsector_type = models.CharField(max_length=20, choices=SUBSECTOR_CHOICES)
+    license_number = models.CharField(max_length=50, unique=True)
+    password = models.CharField(max_length=128, verbose_name='password')
+    
+    def __str__(self):
+        return f"{self.username} ({self.get_subsector_type_display()})"
+
+
+
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
     
@@ -24,20 +31,6 @@ class Clinic(models.Model):
     
     def __str__(self):
         return f"Clinic {self.license_number}"
-
-class Distributor(models.Model):
-    license_number = models.CharField(
-        max_length=15,
-        unique=True,
-        validators=[
-            RegexValidator(
-                regex='^D[A-Z0-9]{4,14}$',
-                message='Distributor license must start with D followed by 4-14 alphanumeric characters',
-                code='invalid_distributor_license'
-            )
-        ]
-    )
-    password = models.CharField(max_length=128)  # Store hashed passwords
     
     def set_password(self, raw_password):
         self.password = make_password(raw_password)
@@ -47,3 +40,5 @@ class Distributor(models.Model):
     
     def __str__(self):
         return f"Distributor {self.license_number}"
+    
+from django.contrib.auth.models import AbstractUser
