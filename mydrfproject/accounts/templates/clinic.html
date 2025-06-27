@@ -1,0 +1,562 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Portal</title>
+    <link rel="stylesheet" href={% static 'interfaceStyle.css' %}>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Clinic Portal</h1>
+            {%for data in sdata %}
+            <h2>Welcome {data.clinic_license}</h2>
+            {%endfor%%}
+            <nav>
+                <ul>
+                    <li><a href="#dashboard">Dashboard</a></li>
+                    <li><a href="#inventory">Inventory</a></li>
+                    <li><a href="#patients">Patients</a></li>
+                    <li><a href="#orders">Orders</a></li>
+                    <li><a href="#communication">Communication</a></li>
+                    <li><a href="#services">Services</a></li>
+                </ul>
+            </nav>
+            <div class="user-info">
+                <span>Welcome, [User Name]</span> <button>Logout</button> </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="dashboard" class="module-section active">
+            <h2>Dashboard</h2> <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>Critical Stock Items</h3>
+                    <p>Medication A: <span class="status-critical">5 units</span></p>
+                    <p>Vaccine B: <span class="status-critical">10 doses</span></p>
+                    <button>View Inventory</button>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Patients Today</h3>
+                    <p>Appointments: 12</p>
+                    <p>Walk-ins: 5</p>
+                    <button>View Schedule</button>
+                </div>
+                <div class="dashboard-card">
+                    <h3>Pending Orders</h3>
+                    <p>Order #12345: <span class="status-pending">Pending Approval</span></p>
+                    <p>Order #12346: <span class="status-processing">Processing</span></p>
+                    <button>View Orders</button>
+                </div>
+                <div class="dashboard-card">
+                    <h3>New Communications</h3>
+                    <p>Unread Messages: 3</p>
+                    <p>Urgent Alerts: 1</p>
+                    <button>View Communications</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="inventory" class="module-section">
+            <h2>Clinic Inventory</h2>
+            <div class="inventory-controls">
+                <input type="text" placeholder="Search inventory..." class="search-input">
+                <select class="filter-select">
+                    <option value="">Filter by Category</option>
+                    <option value="medications">Medications</option>
+                    <option value="vaccines">Vaccines</option>
+                    <option value="supplies">Medical Supplies</option>
+                </select>
+                <button class="add-button" id="addInventoryItemBtnClinic">Add New Item</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Expiry Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Amoxicillin 500mg</td>
+                        <td>150</td>
+                        <td>Capsules</td>
+                        <td>2026-01-15</td>
+                        <td class="status-sufficient">Sufficient</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Insulin (hamlin N)</td>
+                        <td>10</td>
+                        <td>Vials</td>
+                        <td>2024-07-20</td>
+                        <td class="status-critical">Critical</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Bandages (Sterile)</td>
+                        <td>50</td>
+                        <td>Packs</td>
+                        <td>N/A</td>
+                        <td class="status-low">Low</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Paracetamol 500mg</td>
+                        <td>300</td>
+                        <td>Tablets</td>
+                        <td>2025-11-30</td>
+                        <td class="status-sufficient">Sufficient</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Oral Rehydration Salts</td>
+                        <td>200</td>
+                        <td>Sachets</td>
+                        <td>2025-09-01</td>
+                        <td class="status-sufficient">Sufficient</td>
+                        <td><button>Edit</button><button>Delete</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="patients" class="module-section">
+            <h2>Patient Management</h2>
+            <div class="patient-controls">
+                <input type="text" placeholder="Search patients..." class="search-input">
+                <select class="filter-select">
+                    <option value="">Filter by Status</option>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+                <button class="add-button" id="addPatientBtnClinic">Add New Patient</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Patient ID</th>
+                        <th>Name</th>
+                        <th>DOB</th>
+                        <th>Contact</th>
+                        <th>Last Visit</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>P001</td>
+                        <td>Jane Doe</td>
+                        <td>1985-03-10</td>
+                        <td>+254712345678</td>
+                        <td>2025-05-20</td>
+                        <td><button>View</button><button>Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>P002</td>
+                        <td>John Smith</td>
+                        <td>1992-07-25</td>
+                        <td>+254723456789</td>
+                        <td>2025-06-18</td>
+                        <td><button>View</button><button>Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>P003</td>
+                        <td>Emily White</td>
+                        <td>2001-11-01</td>
+                        <td>+254734567890</td>
+                        <td>2025-06-01</td>
+                        <td><button>View</button><button>Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>P004</td>
+                        <td>Michael Brown</td>
+                        <td>1970-02-14</td>
+                        <td>+254745678901</td>
+                        <td>2025-05-15</td>
+                        <td><button>View</button><button>Edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="orders" class="module-section">
+            <h2>Order Management</h2>
+            <div class="order-controls">
+                <input type="text" placeholder="Search orders..." class="search-input">
+                <select class="filter-select">
+                    <option value="">Filter by Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="processing">Processing</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <button class="add-button" id="addNewOrderBtnClinic">Create New Order</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Items</th>
+                        <th>Status</th>
+                        <th>Priority</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ORD001</td>
+                        <td>2025-06-15</td>
+                        <td>Amoxicillin, Bandages</td>
+                        <td class="status-pending">Pending Approval</td>
+                        <td class="priority-urgent">Urgent</td>
+                        <td><button>View</button><button>Cancel</button></td>
+                    </tr>
+                    <tr>
+                        <td>ORD002</td>
+                        <td>2025-06-10</td>
+                        <td>Insulin, Syringes</td>
+                        <td class="status-processing">Processing</td>
+                        <td class="priority-refill">Refill</td>
+                        <td><button>View</button><button>Track</button></td>
+                    </tr>
+                    <tr>
+                        <td>ORD003</td>
+                        <td>2025-06-01</td>
+                        <td>Gloves, Masks</td>
+                        <td class="status-completed">Completed</td>
+                        <td>Routine</td>
+                        <td><button>View</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="communication" class="module-section">
+            <h2>Communication Center</h2>
+            <div class="communication-channels">
+                <div class="chat-list">
+                    <h3>Recent Chats</h3>
+                    <ul>
+                        <li><a href="#" class="active">Organization Admin</a></li>
+                        <li><a href="#">Driver John Doe</a></li>
+                        <li><a href="#">Clinic A Staff</a></li>
+                    </ul>
+                </div>
+                <div class="chat-window">
+                    <h3>Chat with Organization Admin</h3>
+                    <div class="messages">
+                        <div class="message received">
+                            <p>Hello, we received your order request. Will process it soon.</p>
+                            <span>10:30 AM, 2025-06-20</span>
+                        </div>
+                        <div class="message sent">
+                            <p>Great, thank you! We need the insulin urgently.</p>
+                            <span>10:35 AM, 2025-06-20</span>
+                        </div>
+                        <div class="message received">
+                            <p>Understood. Expediting the insulin vials.</p>
+                            <span>11:00 AM, 2025-06-20</span>
+                        </div>
+                    </div>
+                    <div class="message-input">
+                        <input type="text" placeholder="Type your message...">
+                        <button>Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="module-section">
+            <h2>Clinic Services</h2>
+            <div class="services-list">
+                <div class="service-card">
+                    <h3>General Consultation</h3>
+                    <p>Primary healthcare services for various ailments.</p>
+                    <button>Edit Service</button>
+                </div>
+                <div class="service-card">
+                    <h3>Vaccination Program</h3>
+                    <p>Immunization services for children and adults.</p>
+                    <button>Edit Service</button>
+                </div>
+                <div class="service-card">
+                    <h3>Maternity Care</h3>
+                    <p>Antenatal and postnatal care for pregnant women.</p>
+                    <button>Edit Service</button>
+                </div>
+                <button class="add-button" id="addNewServiceBtnClinic">Add New Service</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Essential Medicines Supply Chain. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="patientFormModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add New Patient</h2>
+            <form id="newPatientForm">
+                <div class="form-group">
+                    <label for="patientName">Patient Name:</label>
+                    <input type="text" id="patientName" name="patientName" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientDOB">Date of Birth:</label>
+                    <input type="date" id="patientDOB" name="patientDOB" required>
+                </div>
+                <div class="form-group">
+                    <label for="patientGender">Gender:</label>
+                    <select id="patientGender" name="patientGender" required>
+                        <option value="">Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="patientContact">Contact Number:</label>
+                    <input type="tel" id="patientContact" name="patientContact">
+                </div>
+                <div class="form-group">
+                    <label for="patientAddress">Address:</label>
+                    <input type="text" id="patientAddress" name="patientAddress">
+                </div>
+                <button type="submit" class="submit-button">Add Patient</button>
+                <button type="button" class="cancel-button">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="inventoryItemFormModalClinic" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add New Inventory Item</h2>
+            <form id="newInventoryItemFormClinic">
+                <div class="form-group">
+                    <label for="itemNameClinic">Item Name:</label>
+                    <input type="text" id="itemNameClinic" name="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemQuantityClinic">Quantity:</label>
+                    <input type="number" id="itemQuantityClinic" name="itemQuantity" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemUnitClinic">Unit:</label>
+                    <input type="text" id="itemUnitClinic" name="itemUnit" placeholder="e.g., tablets, ml, vials">
+                </div>
+                <div class="form-group">
+                    <label for="itemExpiryClinic">Expiry Date:</label>
+                    <input type="date" id="itemExpiryClinic" name="itemExpiry">
+                </div>
+                <div class="form-group">
+                    <label for="itemSupplierClinic">Supplier:</label>
+                    <input type="text" id="itemSupplierClinic" name="itemSupplier">
+                </div>
+                <button type="submit" class="submit-button">Add Item</button>
+                <button type="button" class="cancel-button">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="newOrderFormModalClinic" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Create New Order</h2>
+            <form id="newOrderFormClinic">
+                <div class="form-group">
+                    <label for="orderItemClinic">Item to Order:</label>
+                    <input type="text" id="orderItemClinic" name="orderItem" required>
+                </div>
+                <div class="form-group">
+                    <label for="orderQuantityClinic">Quantity:</label>
+                    <input type="number" id="orderQuantityClinic" name="orderQuantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="orderPriorityClinic">Priority:</label>
+                    <select id="orderPriorityClinic" name="orderPriority" required>
+                        <option value="Routine">Routine</option>
+                        <option value="Refill">Refill</option>
+                        <option value="Urgent">Urgent</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="orderNotesClinic">Notes:</label>
+                    <textarea id="orderNotesClinic" name="orderNotes" rows="3"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Place Order</button>
+                <button type="button" class="cancel-button">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="newServiceFormModalClinic" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Add New Service</h2>
+            <form id="newServiceFormClinic">
+                <div class="form-group">
+                    <label for="serviceNameClinic">Service Name:</label>
+                    <input type="text" id="serviceNameClinic" name="serviceName" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceDescriptionClinic">Description:</label>
+                    <textarea id="serviceDescriptionClinic" name="serviceDescription" rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-button">Add Service</button>
+                <button type="button" class="cancel-button">Cancel</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('nav ul li a');
+            const sections = document.querySelectorAll('.module-section');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href').substring(1);
+
+                    sections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.add('active');
+                        } else {
+                            section.classList.remove('active');
+                        }
+                    });
+
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
+
+            document.querySelector('nav ul li a[href="#dashboard"]').classList.add('active');
+
+            // --- New Modal/Pop-up JavaScript ---
+
+            // Get the buttons that open the modals
+            const addPatientBtn = document.getElementById('addPatientBtnClinic');
+            const addInventoryBtn = document.getElementById('addInventoryItemBtnClinic');
+            const addNewOrderBtn = document.getElementById('addNewOrderBtnClinic');
+            const addNewServiceBtn = document.getElementById('addNewServiceBtnClinic');
+
+            // Get the modal elements
+            const patientModal = document.getElementById('patientFormModal');
+            const inventoryModal = document.getElementById('inventoryItemFormModalClinic');
+            const newOrderModal = document.getElementById('newOrderFormModalClinic');
+            const newServiceModal = document.getElementById('newServiceFormModalClinic');
+
+            // Get the <span> element that closes the modals
+            const closeButtons = document.querySelectorAll('.modal .close-button');
+            const cancelButtons = document.querySelectorAll('.modal .cancel-button');
+
+            // Function to open a modal
+            function openModal(modalElement) {
+                if (modalElement) {
+                    modalElement.style.display = 'flex'; // Use flex to center
+                }
+            }
+
+            // Function to close a modal
+            function closeModal(modalElement) {
+                if (modalElement) {
+                    modalElement.style.display = 'none';
+                    // Optionally reset form here
+                    const form = modalElement.querySelector('form');
+                    if (form) {
+                        form.reset();
+                    }
+                }
+            }
+
+            // Event listeners for opening modals
+            if (addPatientBtn) {
+                addPatientBtn.addEventListener('click', () => openModal(patientModal));
+            }
+            if (addInventoryBtn) {
+                addInventoryBtn.addEventListener('click', () => openModal(inventoryModal));
+            }
+            if (addNewOrderBtn) {
+                addNewOrderBtn.addEventListener('click', () => openModal(newOrderModal));
+            }
+            if (addNewServiceBtn) {
+                addNewServiceBtn.addEventListener('click', () => openModal(newServiceModal));
+            }
+
+            // Event listeners for closing modals (X button and Cancel button)
+            closeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    closeModal(e.target.closest('.modal'));
+                });
+            });
+
+            cancelButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    closeModal(e.target.closest('.modal'));
+                });
+            });
+
+            // When the user clicks anywhere outside of the modal content, close it
+            window.addEventListener('click', (event) => {
+                if (event.target.classList.contains('modal')) {
+                    closeModal(event.target);
+                }
+            });
+
+            // Example: Handle form submission (you'll need to implement actual data handling)
+            const newPatientForm = document.getElementById('newPatientForm');
+            if (newPatientForm) {
+                newPatientForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Patient form submitted! (This is a placeholder, integrate with backend)');
+                    // Example of collecting data:
+                    // const formData = new FormData(newPatientForm);
+                    // const patientData = Object.fromEntries(formData.entries());
+                    // console.log(patientData);
+                    closeModal(patientModal);
+                });
+            }
+
+            const newInventoryItemFormClinic = document.getElementById('newInventoryItemFormClinic');
+            if (newInventoryItemFormClinic) {
+                newInventoryItemFormClinic.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Clinic Inventory item form submitted! (Placeholder)');
+                    closeModal(inventoryModal);
+                });
+            }
+
+            const newOrderFormClinic = document.getElementById('newOrderFormClinic');
+            if (newOrderFormClinic) {
+                newOrderFormClinic.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Clinic Order form submitted! (Placeholder)');
+                    closeModal(newOrderModal);
+                });
+            }
+
+            const newServiceFormClinic = document.getElementById('newServiceFormClinic');
+            if (newServiceFormClinic) {
+                newServiceFormClinic.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Clinic Service form submitted! (Placeholder)');
+                    closeModal(newServiceModal);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

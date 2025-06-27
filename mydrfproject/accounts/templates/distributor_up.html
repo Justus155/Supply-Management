@@ -1,0 +1,38 @@
+{% load static %}
+{% load crispy_forms_tags %}
+{% load fontawesome %}
+{% extends 'base_medical.html' %}
+
+{% block content %}
+<div class="medical-auth-container">
+    <div class="medical-header">
+        <img src="{% static 'images/medical_logo.png' %}" alt="Medical Distribution Network">
+        <h2>Distributor Registration</h2>
+    </div>
+    
+    <form method="post" class="medical-form">
+        {% csrf_token %}
+        
+        <div class="medical-form-group">
+            <label for="id_subsector_type">Subsector Type</label>
+            {{ form.subsector_type }}
+        </div>
+        
+        <div class="medical-form-group">
+            <label for="id_license_number">Medical License Number</label>
+            {{ form.license_number }}
+            <small class="medical-hint">Format: MD-XXXX-YYYY</small>
+        </div>
+        
+        <!-- Other form fields -->
+        
+        <button type="submit" class="medical-btn">
+            <i class="fas fa-pills"></i> Register
+        </button>
+    </form>
+    
+    <div class="medical-auth-footer">
+        <p>Already registered? <a href="{% url 'distributor_signin' %}">Sign In</a></p>
+    </div>
+</div>
+{% endblock %}

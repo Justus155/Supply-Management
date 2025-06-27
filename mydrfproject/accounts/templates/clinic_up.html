@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinic Sign Up</title>
+    <link rel="stylesheet" href="{% static 'clinic_up.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Clinic Sign Up</h2>
+        <form method="post" action="">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Clinic Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="license">License Number</label>
+                <input type="text" id="license" name="license" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <button type="submit">Sign Up</button>
+        </form>
+        <a href="home" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>
