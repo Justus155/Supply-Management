@@ -7,5 +7,5 @@ class clinic(AbstractUser):
     password = models.CharField(max_length=128)
     
     def __str__(self):
-        return f"Clinic {self.license_number}"
+        return f"clinic {self.license_number}"
 # Create your models here.
