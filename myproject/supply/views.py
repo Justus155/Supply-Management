@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from .models import Clinic, Distributor
@@ -11,7 +12,18 @@ def clinic_signup_home(request):
     return render(request, 'home.html')
 
 def clinic_signin(request):
-    return render(request, 'clinic_in.html')
+    clinic_license = request.POST.get('clinic_license')
+    password = request.POST.get('password')
+    user=authenticate(request, username=clinic_license, password=password)
+    if user is not None:
+        auth_login(request, user)
+        request.session['clinic_license'] = clinic_license
+        return redirect('clinic_portal')
+    elif request.method == 'POST':
+        messages.error(request, 'Invalid license or password')
+    else:
+        form = loginForm()
+    return render(request, 'clinic_in.html', {'form': form})
 
 def clinic_signup(request):
     if request.method == 'POST':

@@ -1,9 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import Clinic, Distributor
-from . import views
-
-
 
 class loginForm(forms.Form):
     clinic_license = forms.CharField(max_length=15, required=False, label='Clinic License')
@@ -36,7 +32,12 @@ class signupForm(forms.Form):
         model = Distributor
         fields = ['subsector','license_number', 'password']
     subsector = forms.ChoiceField(
-        choices=Distributor.SUBSECTOR_CHOICES,
+        choices=[
+            ('Pharmaceutical', 'Pharmaceutical'),
+            ('Medical Equipment', 'Medical Equipment'),
+            ('Laboratory Supplies', 'Laboratory Supplies'),
+            ('Other', 'Other')
+        ],
         required=True,
         label='Subsector Type'
     )
