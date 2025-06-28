@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'clinic_in.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <title>Clinic Sign In</title>
+    <link rel="stylesheet" href="{% static 'clinic_in.css' %}">
 </head>
 <body>
     <div class="login-container">
         <h2>Clinic Sign In</h2>
-        <form method="post" action="">
+        <form method="post" action="{% url 'clinic_portal' %}">
             {% csrf_token %}
             <div class="form-group">
                 <label for="license">License Number</label>

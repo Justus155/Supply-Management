@@ -11,9 +11,7 @@
     <header>
         <div class="container">
             <h1>Clinic Portal</h1>
-            {%for data in sdata %}
-            <h2>Welcome {data.clinic_license}</h2>
-            {%endfor%%}
+            <h2>Welcome {data.license_number}</h2>
             <nav>
                 <ul>
                     <li><a href="#dashboard">Dashboard</a></li>
@@ -267,7 +265,7 @@
                     </div>
                     <div class="message-input">
                         <input type="text" placeholder="Type your message...">
-                        <button>Send</button>
+                        <button type="submit">Send</button>
                     </div>
                 </div>
             </div>

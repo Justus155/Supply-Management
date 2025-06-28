@@ -9,7 +9,7 @@ User = get_user_model()
 class signupForm(UserCreationForm):
     name= forms.CharField(max_length=100, required=True, label='Clinic Name')
     license_number = forms.CharField(max_length=15, required=True, label='Clinic License Number')
-    password1 = forms.CharField(widget=forms.PasswordInput, label='Password')
+    password = forms.CharField(widget=forms.PasswordInput, label='Password')
 
     class Meta:
         model = clinic
@@ -20,14 +20,9 @@ class signupForm(UserCreationForm):
             'password1': 'Enter a secure password for the clinic account.'
         }
 
-class loginForm(forms.Form):
+class loginForm(AuthenticationForm):
     class Meta:
         model = clinic
         fields = ['license_number', 'password'] # Assuming 'password' is a field in Clinic model
-class signupForm(forms.Form):
-    class Meta:
-        model = clinic
-        fields = ['name','license_number', 'password']
-    name = forms.CharField(max_length=100, required=True, label='Clinic Name')
     license_number = forms.CharField(max_length=5, required=True, label='Clinic License Number')
     password = forms.CharField(widget=forms.PasswordInput, label='Password')

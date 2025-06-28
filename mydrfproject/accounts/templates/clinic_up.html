@@ -11,8 +11,13 @@
 <body>
     <div class="signup-container">
         <h2>Clinic Sign Up</h2>
-        <form method="post" action="">
+        <form method="post" action="{% url 'clinic_login' %}">
             {% csrf_token %}
+            {{ form.non_field_errors }}
+            {{ form.name.errors }}
+            {{ form.license.errors }}
+            {{ form.password.errors }}
+            
             <div class="form-group">
                 <label for="name">Clinic Name</label>
                 <input type="text" id="name" name="name" required>
@@ -25,7 +30,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" >Sign Up</button>
         </form>
         <a href="home" class="back-link">Back to Home</a>
     </div>

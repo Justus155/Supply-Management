@@ -11,6 +11,9 @@ urlpatterns=[
     #signup and login views
     path('clinic_signup/', views.clinic_signup_view, name='clinic_signup'),
     path('clinic_login/', views.clinic_login_view, name='clinic_login'),
+
+    #clinic portal
+    path('clinic_portal/', views.clinic_portal, name='clinic_portal'),
     #mydrf urls
     path('signup/', clinic_signup, name='signup'),
     path('login/', clinic_login, name='login'),

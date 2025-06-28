@@ -1,0 +1,878 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header Styles */
+header {
+    background-color: #2c3e50;
+    color: #fff;
+    padding: 15px 0;
+    border-bottom: 5px solid #1abc9c;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 20px;
+}
+
+header nav {
+    flex-grow: 1;
+    min-width: 0;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Enable horizontal scrolling if items exceed space */
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 5px; /* Give some space for potential scrollbar */
+    justify-content: flex-start;
+}
+
+header nav ul li {
+    margin-left: 30px;
+    flex-shrink: 0;
+}
+
+header nav ul li:first-child {
+    margin-left: 0;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    white-space: nowrap;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #1abc9c;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-left: 20px;
+    flex-shrink: 0;
+}
+
+.user-info span {
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+/* Buttons */
+button {
+    background-color: #1abc9c;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+button:hover {
+    background-color: #16a085;
+}
+
+.add-button {
+    background-color: #3498db;
+}
+
+.add-button:hover {
+    background-color: #2980b9;
+}
+
+/* Main Content Sections */
+main {
+    padding: 20px 0;
+}
+
+.module-section {
+    background-color: #fff;
+    padding: 30px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    display: none;
+}
+
+.module-section.active {
+    display: block;
+}
+
+.module-section h2 {
+    color: #2c3e50;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.dashboard-card {
+    background-color: #ecf0f1;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.dashboard-card h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.dashboard-card p {
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+/* Table Styles (for Inventory, Patients, Orders, Drivers) */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #fff;
+}
+
+table thead {
+    background-color: #f0f0f0;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
+
+table th {
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #e9f5ff;
+}
+
+table button {
+    padding: 6px 10px;
+    font-size: 13px;
+    margin-right: 5px;
+}
+
+/* Status Indicators */
+.status-low {
+    color: #e67e22;
+    font-weight: bold;
+}
+
+.status-critical {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.status-sufficient {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status-pending {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.status-processing {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.status-dispatched {
+    color: #8e44ad;
+    font-weight: bold;
+}
+
+.status-completed {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.status-available {
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.priority-urgent {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+.priority-refill {
+    color: #3498db;
+    font-weight: bold;
+}
+
+/* Controls (Search, Add, Filter) */
+.inventory-controls,
+.patient-controls,
+.order-controls,
+.driver-controls,
+.location-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.search-input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    max-width: 300px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.filter-select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Communication Module */
+.communication-channels {
+    display: flex;
+    gap: 20px;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.chat-list {
+    flex: 0 0 250px;
+    background-color: #f9f9f9;
+    border-right: 1px solid #eee;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.chat-list h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.chat-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-list ul li {
+    margin-bottom: 10px;
+}
+
+.chat-list ul li a {
+    text-decoration: none;
+    color: #34495e;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.chat-list ul li a:hover,
+.chat-list ul li a.active {
+    background-color: #e0f2f7;
+    color: #2980b9;
+    font-weight: bold;
+}
+
+.chat-window {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.chat-window h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.messages {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+    margin-bottom: 15px;
+}
+
+.message {
+    margin-bottom: 15px;
+    max-width: 80%;
+    clear: both;
+}
+
+.message p {
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 15px;
+    word-wrap: break-word;
+    font-family: 'Poppins', sans-serif;
+}
+
+.message span {
+    font-size: 12px;
+    color: #888;
+    display: block;
+    margin-top: 5px;
+}
+
+.message.received {
+    background-color: #ecf0f1;
+    float: left;
+    border-bottom-left-radius: 2px;
+}
+
+.message.received span {
+    text-align: left;
+}
+
+.message.sent {
+    background-color: #1abc9c;
+    color: #fff;
+    float: right;
+    border-bottom-right-radius: 2px;
+}
+
+.message.sent span {
+    text-align: right;
+    color: #eee;
+}
+
+.message-input {
+    display: flex;
+    gap: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.message-input input[type="text"] {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.message-input button {
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+/* Services Module */
+.services-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.service-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.service-card h3 {
+    color: #2c3e50;
+    margin-top: 0;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.service-card p {
+    font-size: 15px;
+    margin-bottom: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.service-card button {
+    align-self: flex-end;
+}
+
+/* Report Options */
+.report-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.report-display {
+    background-color: #ecf0f1;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    font-style: italic;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Profile Form */
+.profile-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 600px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c3e50;
+    font-family: 'Poppins', sans-serif;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-form button[type="submit"] {
+    margin-top: 10px;
+    width: auto;
+    padding: 10px 25px;
+    background-color: #27ae60;
+}
+
+.profile-form button[type="submit"]:hover {
+    background-color: #229a56;
+}
+
+/* Location Module/Map Interface Specific Styles */
+#map-container {
+    height: 500px;
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-style: italic;
+    border: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+}
+
+.location-list {
+    margin-top: 20px;
+}
+
+.location-card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.location-card h3 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.location-card p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Footer */
+footer {
+    background-color: #2c3e50;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    header .container {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 0 15px;
+    }
+
+    header h1 {
+        width: 100%;
+        text-align: center;
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    header nav {
+        flex-basis: 100%;
+        order: 2;
+        margin-bottom: 10px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 5px;
+    }
+
+    header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding-bottom: 0;
+    }
+
+    header nav ul li {
+        margin: 5px 15px;
+    }
+    header nav ul li:first-child {
+        margin-left: 15px;
+    }
+
+    .user-info {
+        width: 100%;
+        justify-content: center;
+        margin-left: 0;
+        margin-top: 10px;
+        order: 3;
+    }
+
+    .user-info span {
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+    .module-section {
+        padding: 20px;
+    }
+    header h1 {
+        font-size: 20px;
+    }
+    table th, table td {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+    button {
+        padding: 6px 10px;
+        font-size: 12px;
+    }
+    .communication-channels {
+        flex-direction: column;
+        height: auto;
+    }
+    .chat-list {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+    .search-input,
+    .filter-select,
+    .add-button {
+        max-width: 100%;
+        width: 100%;
+    }
+    .profile-form {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+    header nav ul li {
+        margin: 5px 8px;
+    }
+    .user-info {
+        flex-direction: column;
+        align-items: center;
+    }
+    .user-info span {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+}
+
+/* Custom Scrollbar Styles for Webkit Browsers (Chrome, Safari, Edge) */
+header nav ul::-webkit-scrollbar {
+    height: 8px;
+}
+
+header nav ul::-webkit-scrollbar-track {
+    background: #2c3e50; /* Dark background color of your header */
+    border-radius: 10px;
+}
+
+header nav ul::-webkit-scrollbar-thumb {
+    background: #1abc9c; /* Vibrant green from your accent color */
+    border-radius: 10px;
+}
+
+header nav ul::-webkit-scrollbar-thumb:hover {
+    background: #16a085; /* A slightly darker green for hover effect */
+}
+
+/* For Firefox (limited styling options) */
+/* html {
+    scrollbar-color: #1abc9c #2c3e50;
+    scrollbar-width: thin;
+} */
+
+/* --- Modal (Pop-up) Styles --- */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top (higher than other content) */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.6); /* Black w/ opacity */
+    display: flex; /* Use flexbox for centering */
+    align-items: center; /* Center vertically */
+    justify-content: center; /* Center horizontally */
+    -webkit-animation: fadeIn 0.5s; /* Fade in animation for Webkit */
+    animation: fadeIn 0.5s; /* Fade in animation */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto; /* Auto margin for older browsers, flexbox handles centering primarily */
+    padding: 30px;
+    border: 1px solid #888;
+    width: 90%; /* Max width for smaller screens */
+    max-width: 600px; /* Max width for larger screens */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    position: relative; /* For positioning the close button */
+    -webkit-animation: slideInTop 0.5s; /* Slide in animation for Webkit */
+    animation: slideInTop 0.5s; /* Slide in animation */
+}
+
+.modal-content h2 {
+    color: #2c3e50; /* Match header color */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.modal .form-group {
+    margin-bottom: 15px; /* Spacing between form groups */
+}
+
+.modal .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333; /* Slightly lighter than heading for labels */
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal .form-group input[type="text"],
+.modal .form-group input[type="number"],
+.modal .form-group input[type="date"],
+.modal .form-group input[type="email"],
+.modal .form-group input[type="tel"],
+.modal .form-group select {
+    width: calc(100% - 22px); /* Full width minus padding and border */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f9f9f9;
+}
+
+.modal .submit-button {
+    background-color: #1abc9c; /* Green accent color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Space above button */
+    margin-right: 10px; /* Space between buttons */
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal .submit-button:hover {
+    background-color: #16a085;
+}
+
+.modal .cancel-button {
+    background-color: #e74c3c; /* Red for cancel/danger */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal .cancel-button:hover {
+    background-color: #c0392b;
+}
+
+
+/* Close Button */
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Animations */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes slideInTop {
+    from {top: -300px; opacity: 0;}
+    to {top: 0; opacity: 1;}
+}
+
+@keyframes slideInTop {
+    from {top: -300px; opacity: 0;}
+    to {top: 0; opacity: 1;}
+}

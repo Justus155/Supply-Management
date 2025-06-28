@@ -5,7 +5,7 @@ from .serializers import ClinicSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .models import clinic
+from .models import clinic,  InventoryItem, Order, Service  # Ensure these models are defined in models.py
 from .forms import signupForm, loginForm  # Make sure signupForm is defined in forms.py
 
 
@@ -17,8 +17,15 @@ def clinic_signup_view(request):
         if form.is_valid():
            user= form.save()
            login(request, user)
+           print(request.POST)
            return redirect('home')
+        else:
+           return render(request, 'clinic_up.html', {'form': form, 'error': 'Invalid form submission'})
+    else:   
+        form= signupForm()
     return render(request, 'clinic_up.html', {'form': form, 'error': 'Invalid form submission'})
+
+
 
 
 def clinic_login_view(request):
@@ -41,6 +48,8 @@ def clinic_login_view(request):
 def home(request):
     return render(request, 'home.html')
 
+def clinic_portal(request):
+    return render(request, 'clinic.html')
 @api_view(['POST'])
 def clinic_signup(request):
     if request.method == 'POST':
